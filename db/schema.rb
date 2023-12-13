@@ -20,17 +20,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_231749) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
-    t.integer "comments_id"
     t.integer "parent_comment_id"
-    t.string "commentable_type", null: false
-    t.integer "commentable_id", null: false
+    t.integer "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
-    t.index ["comments_id"], name: "index_comments_on_comments_id"
+    t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
   end
 
-  add_foreign_key "comments", "comments", column: "comments_id"
   add_foreign_key "comments", "comments", column: "parent_comment_id"
 end
