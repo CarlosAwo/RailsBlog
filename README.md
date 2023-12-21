@@ -22,3 +22,15 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# ======================================
+Crée un Blog de Post
+Model Post, name 
+Qu'est ce qu'un slug
+
+Model Comment name
+La gestion des user
+Model User name email password 
+Un commentaire peut référencé un article ou un autre commentaire 
+
+# =====================================

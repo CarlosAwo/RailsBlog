@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_13_142823) do
-
+ActiveRecord::Schema[7.1].define(version: 2023_12_11_231749) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "name", default: "", null: false
@@ -19,6 +18,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_142823) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end 
+
+  create_table "articles", force: :cascade do |t|
+    t.string "name"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "parent_comment_id"
+    t.integer "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
+  end
+
+  add_foreign_key "comments", "comments", column: "parent_comment_id"
 end
