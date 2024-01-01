@@ -46,6 +46,12 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
+
+  # Rubocop gems
+  gem 'rubocop-capybara', require: false
+  gem 'rubocop-factory_bot', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
