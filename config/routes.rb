@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resource :registrations
   resource :sessions
   root 'home#home'
-  resources :articles
+  resources :articles do
+    resource :comments
+  end
   # root "articles#index"
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
