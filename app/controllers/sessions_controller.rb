@@ -13,6 +13,8 @@ class SessionsController < ApplicationController
       login(@user)
       redirect_to root_path, notice: "User signed successfully"
     else 
+      @user = User.new
+      @user.errors.add(:base, "Email ou Mot de Passe Incorrecte")
       render :new, status: :unprocessable_entity
     end
   end
