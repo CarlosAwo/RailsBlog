@@ -10,7 +10,7 @@ class User < ApplicationRecord
   normalizes :name, with: -> name { name.strip.downcase }
 
   def avatar_url
-    picture.attached? ? Rails.application.routes.url_helpers.rails_blob_path(picture, only_path: true) : '/default_avatar.jpg'
+    avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true) : '/default_avatar.png'
   end
 
 end

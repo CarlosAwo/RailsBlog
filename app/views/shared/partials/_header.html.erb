@@ -31,19 +31,46 @@
         </ul>
       </nav>
 
-      <div class="flex items-center gap-4">
-        <div class="sm:flex sm:gap-4">
-          <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="/">Login</a>
-          <a class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block" href="/">Register</a>
+      <% if user_signed_in? %>
+        <div>
+          <button type="button" class="group flex shrink-0 items-center rounded-lg transition">
+            <span class="sr-only">Menu</span>
+            <img alt="Man" src="<%= current_user.avatar_url %>" class="h-10 w-10 rounded-full object-cover" />
+            <p class="ms-2 hidden text-left text-xs sm:block">
+              <strong class="block font-medium"> <%= current_user.name.titleize %> </strong>
+              <span class="text-gray-500"> <%= current_user.email %> </span>
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" class="ms-4 hidden h-5 w-5 text-gray-500 transition group-hover:text-gray-700 sm:block" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
         </div>
+      <% else %>
+        <div class="flex items-center gap-4">
+          <div class="sm:flex sm:gap-4">
+            <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="/">Login</a>
+            <a class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block" href="/">Register</a>
+          </div>
 
-        <button class="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
-          <span class="sr-only">Toggle menu</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+          <button class="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
+            <span class="sr-only">Toggle menu</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      <% end %>
     </div>
+
   </div>
 </header>
+
+
+  <% if user_signed_in? %>
+    <%= current_user.email %>
+    <%= current_user.name %>
+    <%= link_to 'Déconnexion', sessions_path, class: 'px-3 w-full py-2 gap-2 rounded-lg whitespace-nowrap inline-flex items-center hover:text-gray-800 hover:bg-gray-200 focus:outline-none', data: { turbo_method: :delete, turbo_confirm: "Etes-vous sûre de vouloir vous déconnecté?" } %>
+
+  <% else %>
+    Not Signed In Again
+  <% end %>
