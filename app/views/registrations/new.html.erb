@@ -1,7 +1,8 @@
-<div class='flex justify-center'>
-  <h1 class="text-2xl font-bold sm:text-3xl">Sign Up</h1>
+<div>
+  <h1 class="text-2xl font-bold sm:text-3xl text-center">Sign Up</h1>
 
   <%= form_with(model: @user, url: registrations_path, class: 'mx-auto mb-0 mt-8 max-w-md space-y-4') do |form| %>
+
     <% if @user.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
@@ -13,31 +14,45 @@
         </ul>
       </div>
     <% end %>
-    <div class="mb-4 field">
-      <%= form.label :name , "Nom et Prénom", class: "label"%>
-      <%= form.text_field :name, class: "input", placeholder: "Nom & Prénom "%>
+
+    <div class="input-group">
+      <%= form.label :name, "Name", class: "label" %>
+      <div class="relative">
+        <%= form.text_field :name, class: "input", placeholder: "Name" %>
+        <span class="input-icon"> <%= render "shared/svg/arobase" %> </span>
+      </div>
     </div>
 
-    <div class="mb-4 field">
+    <div class="input-group">
       <%= form.label :email, "Email", class: "label" %>
-      <%= form.email_field :email, class: "input", placeholder: "Email" %>
+      <div class="relative">
+        <%= form.email_field :email, class: "input", placeholder: "Email" %>
+        <span class="input-icon"> <%= render "shared/svg/arobase" %> </span>
+      </div>
     </div>
 
-    <div class="mb-4 field">
-      <%= form.label :password, "Password", class: "label" %>
-      <%= form.password_field :password, class: "input"%>
+    <div class="input-group">
+      <%= form.label :password, "Email", class: "label" %>
+      <div class="relative">
+        <%= form.password_field :password, class: "input", placeholder: "Password" %>
+        <span class="input-icon"> <%= render "shared/svg/arobase" %> </span>
+      </div>
     </div>
 
-    <div class="mb-4 field">
-      <%= form.label :password_confirmation, "Password Confirmation", class: "label" %>
-      <%= form.password_field :password_confirmation, class: "input"%>
+    <div class="input-group">
+      <%= form.label :password_confirmation, "Email", class: "label" %>
+      <div class="relative">
+        <%= form.password_field :password_confirmation, class: "input", placeholder: "Password Confirmation" %>
+        <span class="input-icon"> <%= render "shared/svg/arobase" %> </span>
+      </div>
     </div>
 
-    <div class="flex justify-start">
+    <div class="flex justify-between items-baseline">
       <%= form.submit class: "btn-primary" %>
+      <p class="text-xs text-gray-500"> Already have an account?   <%= link_to "Signin", new_sessions_path, class: "underline" %> </p>
     </div>
+
   <% end %>
 
-    <%= link_to "Signin", new_sessions_path %> 
-
 </div>
+

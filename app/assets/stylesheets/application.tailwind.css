@@ -5,11 +5,28 @@
 
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+    @apply inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white;
   }
-
+  
   .input {
     @apply w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm;
   }
-}
+  
+  .input-group {
+    @apply mb-4;
+  }
+  
+  .form {
+    @apply mx-auto mb-0 mt-8 max-w-md space-y-4;
+  }
+  
+  .label {
+    @apply sr-only p-8;
+  }
+  
+  .input-icon{
+    @apply absolute inset-y-0 end-0 grid place-content-center px-4;
+  }
+
+}  
 
