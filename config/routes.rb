@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+
+  scope module: 'web' do
+    resource :registrations
+    resource :sessions
+    root 'home#home'
+    resources :articles
+  end
   
-  resource :registrations
-  resource :sessions
-  root 'home#home'
-  resources :articles
+  
   # root "articles#index"
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

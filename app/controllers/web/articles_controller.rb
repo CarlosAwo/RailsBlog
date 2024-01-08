@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController
+class Web::ArticlesController < Web::AuthenticationController
   before_action :set_article, only: %i[ show edit update destroy ]
 
   def index
@@ -44,6 +44,6 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-      params.require(:article).permit(:name, :content)
+      params.require(:article).permit(:name, :content, :picture)
     end
 end

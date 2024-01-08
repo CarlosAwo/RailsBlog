@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class Web::SessionsController < Web::AuthenticationController 
   layout 'auth'
   skip_before_action :authenticate_user, only: [:new, :create]
 

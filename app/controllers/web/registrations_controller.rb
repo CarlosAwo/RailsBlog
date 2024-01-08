@@ -1,8 +1,8 @@
-class RegistrationsController < ApplicationController
+class Web::RegistrationsController < Web::AuthenticationController
   layout 'auth'
   skip_before_action :authenticate_user, only: [:new, :create]
 
-  def new 
+  def new
     @user = User.new
   end
 
@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
     if @user.save
       login(@user)
       redirect_to root_path, notice: "User created successfully"
-    else 
+    else
       render :new, status: :unprocessable_entity
     end
   end
