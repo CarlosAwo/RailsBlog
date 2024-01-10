@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resource :registrations
     resource :sessions
     root 'home#home'
-    resources :articles
+    resources :articles do 
+      resources :likes, only: [:create, :destroy]
+    end
   end
   
   

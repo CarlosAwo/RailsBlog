@@ -9,4 +9,8 @@ class Article < ApplicationRecord
     picture.attached? ? Rails.application.routes.url_helpers.rails_blob_path(picture, only_path: true) : '/default_featured_article.jpg'
   end
 
+  def liked_by(user)
+    likes.exists?(user: user, likeable: self)
+  end
+
 end
