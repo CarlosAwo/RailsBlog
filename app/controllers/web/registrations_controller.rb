@@ -6,7 +6,7 @@ class Web::RegistrationsController < Web::AuthenticationController
     @user = User.new
   end
 
-  def create 
+  def create
     @user = User.new(registration_params)
 
     if @user.save
@@ -17,7 +17,8 @@ class Web::RegistrationsController < Web::AuthenticationController
     end
   end
 
-  private 
+  private
+
   def registration_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation)
   end
