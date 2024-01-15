@@ -5,7 +5,9 @@ require:
   - rubocop-capybara
   - rubocop-rspec
 
-# .rubocop.yml
+AllCops:
+  Exclude:
+    - 'db/**/*'
 
 Style/ClassAndModuleChildren:
   Enabled: false
