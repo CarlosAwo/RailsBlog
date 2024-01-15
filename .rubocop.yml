@@ -4,3 +4,8 @@ require:
   - rubocop-rails
   - rubocop-capybara
   - rubocop-rspec
+
+# .rubocop.yml
+
+Style/ClassAndModuleChildren:
+  Enabled: false
