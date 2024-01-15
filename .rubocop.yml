@@ -7,6 +7,10 @@ require:
 
 AllCops:
   Exclude:
+    - bin/bundle
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
     - 'db/**/*'
 
 Style/ClassAndModuleChildren:
