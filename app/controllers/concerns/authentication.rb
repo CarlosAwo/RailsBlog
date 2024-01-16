@@ -20,7 +20,7 @@ module Authentication
   end
 
   def authenticate_user!
-    redirect_to new_sessions_path if Current.user.nil?
+    redirect_to new_sessions_path unless user_signed_in?
   end
 
   def authenticate_user
