@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     root 'home#home'
     resources :articles do 
       resources :likes, only: [:create, :destroy]
+      resource :comments
     end
   end
   

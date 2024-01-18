@@ -5,7 +5,9 @@ class Web::ArticlesController < Web::AuthenticationController
     @articles = Article.all
   end
 
-  def show; end
+  def show
+    @comment = @article.comments.build
+  end
 
   def new
     @article = Article.new
