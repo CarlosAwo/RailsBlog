@@ -1,5 +1,5 @@
-class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update destroy ]
+class Web::ArticlesController < Web::AuthenticationController
+  before_action :set_article, only: %i[show edit update destroy]
 
   def index
     @articles = Article.all
@@ -13,11 +13,10 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
 
     if @article.save
       redirect_to article_url(@article), notice: "Article was successfully created."
@@ -40,11 +39,12 @@ class ArticlesController < ApplicationController
   end
 
   private
-    def set_article
-      @article = Article.find(params[:id])
-    end
 
-    def article_params
-      params.require(:article).permit(:name, :content)
-    end
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    params.require(:article).permit(:name, :content, :picture)
+  end
 end

@@ -12,10 +12,13 @@
   </head>
 
   <body>
+    <%= render "shared/partials/flashes" %>
     <%= alert %>
     <%= notice %>
+    <%= render "shared/partials/header" %>
     <main class="">
       <%= yield %>
     </main>
+    <%= render "shared/partials/footer" %>
   </body>
 </html>

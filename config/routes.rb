@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  
-  resource :registrations
-  resource :sessions
-  root 'home#home'
-  resources :articles do
-    resource :comments
+  scope module: 'web' do
+    resource :registrations
+    resource :sessions
+    root 'home#home'
+    resources :articles do 
+      resources :likes, only: [:create, :destroy]
+      resource :comments
+    end
   end
+  
+  
   # root "articles#index"
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

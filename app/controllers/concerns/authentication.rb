@@ -2,7 +2,6 @@ module Authentication
   extend ActiveSupport::Concern
 
   included do
-    before_action :authenticate_user
     helper_method :user_signed_in?, :current_user  
   end
 
@@ -12,16 +11,20 @@ module Authentication
     Current.user
   end
 
+  def redirect_if_already_logged_in!
+    redirect_to root_path, notice: 'You are already logged in.' and return if Current.user.present?
+  end
+
   def user_signed_in?
     current_user.present?
   end
 
+  def authenticate_user!
+    redirect_to new_sessions_path unless user_signed_in?
+  end
+
   def authenticate_user
-    if authenticated_user = authenticated_user_from_session
-      Current.user = authenticated_user
-    else
-      redirect_to new_sessions_path
-    end
+    Current.user = authenticated_user_from_session
   end
 
   def authenticated_user_from_session

@@ -19,3 +19,9 @@
   <%= render "comments/new", comment: @comment, article: @article%>
 
 </div>
+
+<% if @article.liked_by(current_user) %>
+  <%= button_to "UnLike", article_like_path(article_id: @article.id, id: Like.find_by(user: current_user, likeable: @article)), method: :delete, class: "btn-danger" %>
+<% else %>
+  <%= button_to "like", article_likes_path(@article), method: :post, class: "btn-success"%>
+<% end %>
