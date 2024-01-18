@@ -1,13 +1,16 @@
-<div>
-  <h1 class="font-bold text-4xl">Home#home</h1>
-  <p>Find me in app/views/home/home.html.erb</p>
-  <p>se</p>
-  <% if user_signed_in? %>
-    <%= current_user.email %>
-    <%= current_user.name %>
-    <%= link_to 'Déconnexion', sessions_path, class: 'px-3 w-full py-2 gap-2 rounded-lg whitespace-nowrap inline-flex items-center hover:text-gray-800 hover:bg-gray-200 focus:outline-none', data: { turbo_method: :delete, turbo_confirm: "Etes-vous sûre de vouloir vous déconnecté?" } %>
+<%= render 'shared/partials/hero' %>
 
-  <% else %>
-    Not Signed In Again
-  <% end %>
+<div class='mt-4'>
+  <div class="mx-auto max-w-lg text-center">
+    <h2 class="text-3xl font-bold sm:text-4xl">Kickstart your marketing</h2>
+
+    <p class="mt-4 text-gray-300">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus
+      nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 m-12" id="articles">
+    <%= render @articles  %>
+  </div>
 </div>

@@ -1,3 +1,5 @@
 class Web::HomeController < Web::BaseController
-  def home; end
+  def home
+    @articles = Article.all
+  end
 end
