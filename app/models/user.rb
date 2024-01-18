@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_secure_password
 
+  has_many :articles
+  has_many :comments
+
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true, uniqueness: true
   validates :password_confirmation, presence: true

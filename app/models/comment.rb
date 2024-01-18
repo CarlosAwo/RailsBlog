@@ -3,6 +3,7 @@ class Comment < ApplicationRecord
   has_many :likes, as: :likeable
 
   belongs_to :article
+  belongs_to :user
   belongs_to :parent_comment, class_name: 'Comment', optional: true
 
   def parent_comment?

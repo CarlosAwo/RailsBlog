@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  belongs_to :user
+
   has_one_attached :picture
   has_many :comments, -> { where(parent_comment: nil) }
   has_many :likes, as: :likeable
