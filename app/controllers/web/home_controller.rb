@@ -1,3 +1,3 @@
-class Web::HomeController < Web::AuthenticationController
+class Web::HomeController < Web::BaseController
   def home; end
 end
