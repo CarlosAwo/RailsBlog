@@ -1,0 +1,20 @@
+<footer class="bg-gray-800 text-white p-4">
+  <div class="container mx-auto text-center">
+      <p>&copy; 2024 Your Blog. All rights reserved.</p>
+      <!-- Add social media links and other footer content as needed -->
+  </div>
+</footer>
+
+<div>
+  <h1 class="font-bold text-4xl">Home#home</h1>
+  <p>Find me in app/views/home/home.html.erb</p>
+  <p>se</p>
+  <% if user_signed_in? %>
+    <%= current_user.email %>
+    <%= current_user.name %>
+    <%= link_to 'Déconnexion', sessions_path, class: 'px-3 w-full py-2 gap-2 rounded-lg whitespace-nowrap inline-flex items-center hover:text-gray-800 hover:bg-gray-200 focus:outline-none', data: { turbo_method: :delete, turbo_confirm: "Etes-vous sûre de vouloir vous déconnecté?" } %>
+
+  <% else %>
+    Not Signed In Again
+  <% end %>
+</div>
