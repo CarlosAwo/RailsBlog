@@ -33,9 +33,12 @@
 
     <div class="flex justify-between items-baseline">
       <%= form.submit "Sign In", class: "btn-primary" %>
-      <p class="text-sm text-gray-500"> No account?   <%= link_to "Signup", new_registrations_path, class: "underline" %> </p>
     </div>
 
+    <div class="input-group">
+      <span class="text-sm text-gray-500"> No account ? <%= link_to "Signup", new_registrations_path, class: "underline" %> </span>
+      <br>
+      <span class="text-sm text-gray-500">  <%= link_to "Forgot Your Password ?", new_registrations_path, class: "underline" %> </span>
+    </div>
   <% end %>
-
 </div>
