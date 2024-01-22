@@ -1,5 +1,5 @@
 class Web::HomeController < Web::BaseController
   def home
-    @articles = Article.all
+    @articles = ArticleDecorator.decorate_collection(Article.all)
   end
 end

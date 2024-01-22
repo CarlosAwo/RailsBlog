@@ -7,6 +7,7 @@ class Web::ArticlesController < Web::AuthenticationController
 
   def show
     @comment = @article.comments.build
+    @article = @article.decorate
   end
 
   def new
