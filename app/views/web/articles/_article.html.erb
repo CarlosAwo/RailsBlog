@@ -4,6 +4,9 @@
     <div class="flex items-center mb-4">
         <img src="<%= article.author_avatar_url %>" alt="Author Avatar" class="w-8 h-8 rounded-full mr-2">
         <span class="text-gray-600 text-sm">John Doe</span>
+        <span class='p-2'>
+          <%= render 'web/articles/likes_actions', article: article %>
+        </span>
     </div>
     <h2 class="text-xl font-bold mb-2"><%= article.name %></h2>
     <p class="text-gray-700"><%= article.display_resume %></p>

@@ -6,9 +6,9 @@ class Web::LikesController < Web::AuthenticationController
     @like = @likeable.likes.build(user: current_user)
 
     if @like.save
-      redirect_to @likeable, notice: 'You liked this.'
+      redirect_to(request.referer || @likeable || root_path, notice: 'You liked this.')
     else
-      redirect_to @likeable, alert: 'Unable to like.'
+      redirect_to(request.referer || @likeable || root_path, alert: 'Unable to like.')
     end
   end
 
@@ -16,7 +16,7 @@ class Web::LikesController < Web::AuthenticationController
     @like = @likeable.likes.find(params[:id])
     @like.destroy
 
-    redirect_to @likeable, notice: 'You unliked this.'
+    redirect_to(request.referer || @likeable || root_path, notice: 'You unliked this.')
   end
 
   private
