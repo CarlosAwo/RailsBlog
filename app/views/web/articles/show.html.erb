@@ -1,27 +1,47 @@
-<div class="mx-auto md:w-2/3 w-full flex flex-col">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
+<% content_for :article_name do %> <%=  @article.name %> <% end %>
 
-    <%= render @article %>
+<div class="relative bg-cover bg-center h-64 flex items-center text-white" style="background-image: url('https://picsum.photos/1200/600')">
+        <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay -->
 
-    <%= link_to "Edit this article", edit_article_path(@article), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this article", article_path(@article), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <div class="container mx-auto text-center z-10">
+        <h1 class="text-4xl font-bold leading-tight">Your Article Title</h1>
+        <p class="text-gray-500 mt-2">Published on <%= @article.display_publication_date %></p>
+        <img src="<%= @article.author_avatar_url %>" alt="Author Avatar" class="w-8 h-8 rounded-full mx-auto">
     </div>
-    <%= link_to "Back to articles", articles_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
-
-
-  <%= render "comments/index", comments: @article.comments %>
-
-  <%= render "comments/new", comment: @comment, article: @article%>
-
 </div>
 
-<% if @article.liked_by(current_user) %>
-  <%= button_to "UnLike", article_like_path(article_id: @article.id, id: Like.find_by(user: current_user, likeable: @article)), method: :delete, class: "btn-danger" %>
-<% else %>
-  <%= button_to "like", article_likes_path(@article), method: :post, class: "btn-success"%>
-<% end %>
+<div class="container mx-auto">
+
+  <div class=" mt-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-lg overflow-hidden shadow-md p-6">
+      <p class="text-gray-800 leading-relaxed"> <%== "#{@article.content} <br><br>" * 4 %> </p>
+    </div>
+  </div>
+
+  <div class="mx-auto flex justify-center my-4">
+    <% if @article.liked_by(current_user) %>
+      <%= button_to "UnLike", article_like_path(article_id: @article.id, id: Like.find_by(user: current_user, likeable: @article)), method: :delete, class: "btn-danger" %>
+    <% else %>
+      <%= button_to "like", article_likes_path(@article), method: :post, class: "btn-success"%>
+    <% end %>
+
+    <%= link_to "Edit this article", edit_article_path(@article), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= button_to "Destroy this article", article_path(@article), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <%= link_to "Back to articles", articles_path, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  </div>
+
+  <span class="flex items-center my-6">
+    <span class="h-px flex-1 bg-black"></span>
+  </span>
+
+  <div class="mx-auto md:w-2/3 w-full flex flex-col">
+    <h1 class="font-bold text-4xl">Leave a Comment</h1>
+    <%= render "web/comments/new", comment: @comment, article: @article%>
+  </div>
+
+  <div class="mx-auto md:w-2/3 w-full flex flex-col">
+    <h1 class="font-bold text-4xl">Comments</h1>
+    <%= render "web/comments/index", comments: @article.comments %>
+  </div>
+
+</div>
