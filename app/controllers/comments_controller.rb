@@ -1,29 +1,27 @@
 class CommentsController < ApplicationController
-  before_action :set_article
-
-  def index
-    @comments = @article.comments
-  end
+  before_action :set_commentable
 
   def create
-    @comment = @article.comments.new(comment_params)
+    @comment = @commentable.comments.new(comment_params)
 
     if @comment.save
-      puts "HELOOOOOOOOOOOOOO"
-      redirect_to article_url(@article), notice: "Comment was successfully created."
+      redirect_to(request.referer || @commentable || root_path, notice: 'Comment created successfully.')
     else
-      puts "WOOOOOOOOOOOOOOOO"
-      render "articles/show", article: @article, status: :unprocessable_entity
+      redirect_to(request.referer || @commentable || root_path, alert: 'Unable to Create comment.')
     end
   end
 
   private
 
-  def set_article
-    @article = Article.find(params[:article_id])
+  def set_commentable
+    if params[:article_id]
+      @commentable = Article.find(params[:article_id])
+    elsif params[:comment_id]
+      @commentable = Comment.find(params[:comment_id])
+    end
   end
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body).with_defaults(user: current_user)
   end
 end
