@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope module: 'web' do
     resource :registrations
+    resource :password, only: [:edit, :update], controller: 'password'
     resource :sessions
     root 'home#home'
     resources :articles do 

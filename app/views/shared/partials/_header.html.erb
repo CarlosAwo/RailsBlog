@@ -28,6 +28,13 @@
           <li>
             <a class="text-gray-500 transition hover:text-gray-500/75" href="/">Blog</a>
           </li>
+
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to 'Edit Password', edit_password_path, class: 'text-gray-500 transition hover:text-gray-500/75' %>
+            </li>
+          <% end %>
+
         </ul>
       </nav>
 

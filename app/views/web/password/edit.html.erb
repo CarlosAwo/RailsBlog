@@ -1,0 +1,47 @@
+<div>
+  <h1 class="text-2xl font-bold sm:text-3xl text-center">Change Password</h1>
+
+  <%= form_with(model: current_user, url: password_path, class: 'form') do |form| %>
+
+    <% if form.object.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+        <h2><%= pluralize(form.object.errors.count, "error") %> prohibited  from being saved:</h2>
+
+        <ul>
+          <% form.object.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="input-group">
+      <%= form.label :password, "Password", class: "label" %>
+      <div class="relative">
+        <%= form.password_field :password, class: "input", placeholder: "Password" %>
+        <span class="input-icon"> <%= render "shared/svg/arobase" %> </span>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <%= form.label :password_confirmation, "Password Confirmation", class: "label" %>
+      <div class="relative">
+        <%= form.password_field :password_confirmation, class: "input", placeholder: "Password Confirmation" %>
+        <span class="input-icon"> <%= render "shared/svg/arobase" %> </span>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <%= form.label :password_challenge, "Current Password", class: "label" %>
+      <div class="relative">
+        <%= form.password_field :password_challenge, class: "input", placeholder: "Current Password" %>
+        <span class="input-icon"> <%= render "shared/svg/arobase" %> </span>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-baseline">
+      <%= form.submit "Update Password", class: "btn-primary" %>
+    </div>
+
+  <% end %>
+</div>
