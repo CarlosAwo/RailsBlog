@@ -16,4 +16,8 @@ class User < ApplicationRecord
     avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true) : '/default_avatar.png'
   end
 
+  generates_token_for :password_reset, expires_in: 2.minutes do
+    password_salt&.last(10)
+  end
+
 end
