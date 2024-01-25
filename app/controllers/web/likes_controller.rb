@@ -13,7 +13,7 @@ class Web::LikesController < Web::AuthenticationController
   end
 
   def destroy
-    @like = @likeable.likes.find(params[:id])
+    @like = @likeable.likes.find_by(user: current_user)
     @like.destroy
 
     redirect_to(request.referer || @likeable || root_path, notice: 'You unliked this.')

@@ -2,7 +2,7 @@
 
   <% if article.liked_by(current_user) %>
 
-    <%= button_to article_like_path(article_id: article.id, id: Like.find_by(user: current_user, likeable: article)), method: :delete do %>
+    <%= button_to article_likes_path(article_id: article.id), method: :delete do %>
       <%= render 'shared/svg/solid_heart' %>
     <% end %>
     

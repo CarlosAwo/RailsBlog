@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resource :sessions
     root 'home#home'
     resources :articles do 
-      resources :likes, only: [:create, :destroy]
+      resources :likes, only: [:create] do
+        collection do 
+          delete :destroy
+        end
+      end
       resource :comments
     end
 
