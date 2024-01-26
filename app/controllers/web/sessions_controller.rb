@@ -10,9 +10,8 @@ class Web::SessionsController < Web::AuthenticationController
   def create
     @user = User.authenticate_by(authenticate_params)
 
-    if @user
+    if @user.present?
       login(@user)
-      redirect_to root_path, notice: "User signed successfully"
     else
       @user = User.new
       @user.errors.add(:base, "Email ou Mot de Passe Incorrecte")
