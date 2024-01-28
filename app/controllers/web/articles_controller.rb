@@ -8,11 +8,9 @@ class Web::ArticlesController < Web::AuthenticationController
     @articles = Article.all
     @per_page = 2
     @page = params[:page].to_i || 1
-    @articles_grouped_by_pages = @articles.each_slice(@per_page).to_a
-    @total_pages = @articles_grouped_by_pages.length
-    @articles = @articles_grouped_by_pages[@page - 1].nil? ? [] : @articles_grouped_by_pages[@page - 1]
-    # @articles = @articles.offset((@page - 1) * @per_page).limit(@per_page)
-    console
+    @total_pages = (@articles.count.to_f / @per_page).ceil
+    @articles = @articles.offset((@page - 1) * @per_page).limit(@per_page)
+    @articles = @articles.decorate
   end
 
   def show
