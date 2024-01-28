@@ -8,9 +8,15 @@
     <%= link_to "New article", new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="articles" class="min-w-full mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
-    <%= render @articles %>
-  </div>
+
+  <ul>
+    <% @articles.each do |article| %>
+      <li> <%= article.name %> </li>
+    <% end %>
+  </ul>
+
+    Pages<%=  @total_pages %>
+  Current Page<%=  @page %>
 </div>
 
 

@@ -2,6 +2,19 @@ class Web::ArticlesController < Web::AuthenticationController
   layout 'article', only: [:show]
   before_action :set_article, only: %i[show edit update destroy]
 
+  skip_before_action :authenticate_user!, only: [:index]
+
+  def index
+    @articles = Article.all
+    @per_page = 2
+    @page = params[:page].to_i || 1
+    @articles_grouped_by_pages = @articles.each_slice(@per_page).to_a
+    @total_pages = @articles_grouped_by_pages.length
+    @articles = @articles_grouped_by_pages[@page - 1].nil? ? [] : @articles_grouped_by_pages[@page - 1]
+    # @articles = @articles.offset((@page - 1) * @per_page).limit(@per_page)
+    console
+  end
+
   def show
     @comment = @article.comments.build
     @article = @article.decorate
