@@ -1,15 +1,13 @@
 class Web::ArticlesController < Web::AuthenticationController
+  include Pagination
+
   layout 'article', only: [:show]
   before_action :set_article, only: %i[show edit update destroy]
-
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @articles = Article.all
-    @per_page = 2
-    @page = params[:page].to_i || 1
-    @total_pages = (@articles.count.to_f / @per_page).ceil
-    @articles = @articles.offset((@page - 1) * @per_page).limit(@per_page)
+    @articles = paginate(@articles)
     @articles = @articles.decorate
   end
 
