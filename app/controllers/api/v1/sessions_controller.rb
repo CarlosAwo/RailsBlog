@@ -13,8 +13,6 @@ class Api::V1::SessionsController < Api::V1::AuthenticationController
 
   def destroy
     logout(current_user)
-    # Delete Authorization header
-    request.delete_header('HTTP_AUTHORIZATION')
   end
 
   private

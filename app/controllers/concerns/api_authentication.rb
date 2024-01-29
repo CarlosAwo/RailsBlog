@@ -31,7 +31,7 @@ module ApiAuthentication
 
   def login(user)
     token = "Bearer #{user.generate_token_for(:api_login)}"
-    response.set_header('AUTHORIZATION', token)
+    response.set_header('Authorization', token)
     Current.user = user
 
     render json: { message: 'Login successful', token: token }
@@ -40,6 +40,7 @@ module ApiAuthentication
   def logout(user)
     Current.user = nil
     user&.revoke_api_token
+    request.delete_header('Authorization')
     render json: { message: 'Logout successful' }
   end
 end
