@@ -3,6 +3,11 @@ Rails.application.routes.draw do
     resource :registrations
     resource :password, only: [:edit, :update], controller: 'password'
     resource :password_reset, only: [:new, :create, :edit, :update], controller: 'password_reset'
+    resource :confirmations, only: [:new, :create] do 
+      collection do
+        get 'confirm'
+      end
+    end
     resource :sessions
     root 'home#home'
     resources :articles do 
