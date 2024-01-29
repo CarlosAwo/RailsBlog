@@ -32,7 +32,12 @@ module Authentication
   end
 
   def login(user)
-    session[:user_id] = user.id
+    if user.active_for_authentication?
+      session[:user_id] = user.id
+      redirect_to root_path, notice: "User signed successfully"
+    else
+      redirect_to(root_path, alert: user.inactive_for_authentication_message) and return
+    end
   end
 
   def logout(user)

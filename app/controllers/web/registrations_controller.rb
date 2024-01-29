@@ -11,7 +11,6 @@ class Web::RegistrationsController < Web::AuthenticationController
 
     if @user.save
       login(@user)
-      redirect_to root_path, notice: "User created successfully"
     else
       render :new, status: :unprocessable_entity
     end
