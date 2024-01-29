@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true, uniqueness: true
-  validates :password_confirmation, presence: true
+  # validates :password_confirmation, presence: true
 
   normalizes :email, with: -> email { email.strip.downcase }
   normalizes :name, with: -> name { name.strip.downcase }
@@ -20,4 +20,11 @@ class User < ApplicationRecord
     password_salt&.last(10)
   end
 
+  generates_token_for :api_login, expires_in: 2.minutes do
+    api_last_logout.to_s&.last(10)
+  end
+
+  def revoke_api_token
+    update(api_last_logout: Time.zone.now)
+  end
 end
