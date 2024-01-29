@@ -81,6 +81,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_135958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "confirmed_at"
+    t.datetime "api_last_logout"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
