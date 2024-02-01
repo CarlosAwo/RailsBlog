@@ -38,6 +38,14 @@
 
   .notification {
     @apply rounded-xl border border-gray-100 bg-white p-4;
+    position: absolute;
+    top: -15%;
+    animation-name: notification_appear;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
   }
 
   .notice-notification {
@@ -73,4 +81,13 @@
   }
 
 }  
+
+@keyframes notification_appear {
+  from {
+    top: -15%; 
+  }
+  to {
+    top: 20%;
+  }
+}
 

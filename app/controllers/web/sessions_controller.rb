@@ -22,7 +22,7 @@ class Web::SessionsController < Web::AuthenticationController
   def destroy
     logout(current_user)
 
-    redirect_to new_sessions_path
+    redirect_to new_sessions_path, notice: 'Logout SuccessFul'
   end
 
   private
