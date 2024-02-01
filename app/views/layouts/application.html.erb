@@ -15,11 +15,11 @@
   </head>
 
   <body>
-    <%= render "shared/partials/flashes" %>
     <%= render "shared/partials/header" %>
     <main class="">
       <%= yield %>
     </main>
     <%= render "shared/partials/footer" %>
+    <%= render "shared/partials/flashes", flash: flash %>
   </body>
 </html>
