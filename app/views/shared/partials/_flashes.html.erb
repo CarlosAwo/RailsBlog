@@ -1,7 +1,7 @@
 <% if flash.present? %>
   <div class="flex flex-col">
     <% flash.each do |flash_type, message| %>
-    <div role="alert" class="notification flex <%= flash_type %>-notification">
+    <div role="alert" class="notification flex <%= flash_type %>-notification" data-controller="notification">
       <span class="notification-icon">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -14,7 +14,7 @@
         <p class="notification-content" id="notice"> <%= message.split("::").length == 1 ? message.split("::")[0] : message.split("::")[1] %> </p>
       </div>
 
-      <button class="text-gray-500 transition hover:text-gray-600">
+      <button class="text-gray-500 transition hover:text-gray-600" data-action="notification#dismiss">
         <span class="sr-only">Dismiss popup</span>
         <%= render 'shared/svg/x' %>
       </button>
