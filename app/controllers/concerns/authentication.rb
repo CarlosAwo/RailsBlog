@@ -42,5 +42,7 @@ module Authentication
 
   def logout(user)
     session.delete(:user_id)
+    Current.user = nil
+    redirect_to root_path, notice: 'Logout SuccessFul'
   end
 end
