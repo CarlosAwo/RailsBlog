@@ -1,16 +1,18 @@
-<article class="bg-white rounded-lg overflow-hidden shadow-md">
-  <img alt="Office" src="<%= article.picture_url %>" alt="Blog Post Image" class="w-full h-48 object-cover max-w-full">
-  <div class="p-6">
-    <div class="flex items-center mb-4">
-        <img src="<%= article.author_avatar_url %>" alt="Author Avatar" class="w-8 h-8 rounded-full mr-2">
-        <span class="text-gray-600 text-sm">John Doe</span>
-        <span class='p-2'>
-          <%= render 'web/articles/likes_actions', article: article %>
-        </span>
+<%= turbo_frame_tag article do %>
+  <article class="bg-white rounded-lg overflow-hidden shadow-md">
+    <img alt="Office" src="<%= article.picture_url %>" alt="Blog Post Image" class="w-full h-48 object-cover max-w-full">
+    <div class="p-6">
+      <div class="flex items-center mb-4">
+          <img src="<%= article.author_avatar_url %>" alt="Author Avatar" class="w-8 h-8 rounded-full mr-2">
+          <span class="text-gray-600 text-sm">John Doe</span>
+          <span class='p-2'>
+            <%= render 'web/articles/likes_actions', article: article %>
+          </span>
+      </div>
+      <h2 class="text-xl font-bold mb-2"><%= article.name %></h2>
+      <p class="text-gray-700"><%= article.display_resume %></p>
+      <p class="text-gray-500 mt-2">Published on <%= article.display_publication_date %></p>
+      <%= link_to "Read More", article, class: "mt-4 block text-blue-500 hover:underline" %>
     </div>
-    <h2 class="text-xl font-bold mb-2"><%= article.name %></h2>
-    <p class="text-gray-700"><%= article.display_resume %></p>
-    <p class="text-gray-500 mt-2">Published on <%= article.display_publication_date %></p>
-    <%= link_to "Read More", article, class: "mt-4 block text-blue-500 hover:underline" %>
-  </div>
-</article>
+  </article>
+<% end %>

@@ -5,10 +5,13 @@ class Web::LikesController < Web::AuthenticationController
   def create
     @like = @likeable.likes.build(user: current_user)
 
-    if @like.save
-      redirect_to(request.referer || @likeable || root_path, notice: 'You liked this.')
-    else
-      redirect_to(request.referer || @likeable || root_path, alert: 'Unable to like.')
+    respond_to do |format|
+      if @like.save
+        format.html { redirect_to(request.referer || @likeable || root_path, notice: 'You liked this.') }
+        format.turbo_stream
+      else
+        redirect_to(request.referer || @likeable || root_path, alert: 'Unable to like.')
+      end
     end
   end
 
@@ -16,7 +19,10 @@ class Web::LikesController < Web::AuthenticationController
     @like = @likeable.likes.find_by(user: current_user)
     @like.destroy
 
-    redirect_to(request.referer || @likeable || root_path, notice: 'You unliked this.')
+    respond_to do |format|
+      format.html { redirect_to(request.referer || @likeable || root_path, notice: 'You unliked this.')}
+      format.turbo_stream
+    end
   end
 
   private
