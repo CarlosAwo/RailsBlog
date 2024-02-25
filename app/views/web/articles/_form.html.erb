@@ -1,4 +1,4 @@
-<%= form_with(model: article, class: "contents") do |form| %>
+<%= form_with(model: article, class: "contents", id:'form', data: { controller: 'filedrop' }) do |form| %>
   <% if article.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -22,11 +22,58 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :picture %>
-    <%= form.file_field :picture, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <div id="drop-area" class="border-2 border-gray-400 border-dashed py-16 p-8 rounded-lg text-center cursor-pointer">
+      <%= form.file_field :picture, class: "", id: 'inputFile' %>
+    </div>
   </div>
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
+
+<script>
+
+let dropZone = document.getElementById('drop-area')
+let inputFile = document.getElementById('inputFile')
+let form = document.getElementById('form')
+
+dropZone.addEventListener('dragover', (e)=>{
+  e.preventDefault()
+  dropZone.classList.add('ondropping')
+  console.log(45555555555555555555)
+})
+
+dropZone.addEventListener('dragleave', (e)=>{
+  e.preventDefault()
+  dropZone.classList.remove('ondropping')
+  console.log(45555555555555555555)
+})
+
+dropZone.addEventListener('dragend', (e)=>{
+  e.preventDefault()
+  dropZone.classList.remove('ondropping')
+  console.log(45555555555555555555)
+})
+
+
+dropZone.addEventListener('drop', (e)=>{
+  e.preventDefault()
+  dropZone.classList.remove('ondropping')
+
+  console.log('999999999999999999999')
+  let a = e.dataTransfer.files[0]
+  console.log(a.name)
+  inputFile.files = e.dataTransfer.files;
+  form.requestSubmit()
+
+})
+
+console.log(inputFile.form)
+console.log(inputFile.form)
+
+
+</script>
+
+
+
