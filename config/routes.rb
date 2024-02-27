@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       end
     end
     resource :sessions
+    resources :subscribers, only: [:new, :create] do 
+      collection do
+        get 'confirm'
+      end
+    end
     root 'home#home'
     resources :articles do 
       resources :likes, only: [:create] do

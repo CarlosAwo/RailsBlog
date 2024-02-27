@@ -5,6 +5,8 @@ class Article < ApplicationRecord
   has_many :comments, -> { where(parent_comment: nil) }
   has_many :likes, as: :likeable
 
+  validates :name, :content, presence: true
+
   validates :picture, allow_blank: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..(2.megabytes) }
 
   def picture_url
