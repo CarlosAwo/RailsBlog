@@ -13,6 +13,8 @@ class Api::V1::SessionsController < Api::V1::AuthenticationController
 
   def destroy
     logout(current_user)
+    user.update_columns(unique_session_id: nil)
+    redirect_to root_path, notice: 'Logout SuccessFul'
   end
 
   private

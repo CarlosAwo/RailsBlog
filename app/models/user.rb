@@ -16,16 +16,24 @@ class User < ApplicationRecord
   normalizes :email, with: -> email { email.strip.downcase }
   normalizes :name, with: -> name { name.strip.downcase }
 
-  def active_for_authentication?
+  def active_for_authentication?(data: {})
     if confirmed_at.nil?
       self.inactive_for_authentication_message = 'You need To Confirm Your Email'
       return false
     end
+
+    # if active? && data[:session_id].present?
+    #   self.
+    # end
     true
   end
 
   def avatar_url
     avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true) : '/default_avatar.png'
+  end
+
+  def active?
+    unique_session_id.present?
   end
 
   generates_token_for :password_reset, expires_in: 2.minutes do
