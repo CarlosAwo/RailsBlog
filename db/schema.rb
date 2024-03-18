@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_26_135958) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_29_110222) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,8 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_135958) do
   create_table "articles", force: :cascade do |t|
     t.string "name"
     t.text "content"
-    t.integer "content_id"
-    t.integer "user_id", null: false
+    t.bigint "content_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count"
@@ -53,9 +56,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_135958) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
-    t.integer "parent_comment_id"
-    t.integer "article_id"
-    t.integer "user_id", null: false
+    t.bigint "parent_comment_id"
+    t.bigint "article_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count"
@@ -65,9 +68,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_135958) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "likeable_type", null: false
-    t.integer "likeable_id", null: false
+    t.bigint "likeable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
