@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: rails_blog__production
+  database: rails_blog_db_postgres
   username: rails_blog
-  password: <%= ENV["rails_blog_IPAY_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABSE_URL"] %>
